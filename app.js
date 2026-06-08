@@ -1,4 +1,4 @@
-const plannerData = [
+const basePlannerData = [
   {
     id: "frontend",
     title: "Front-end",
@@ -323,7 +323,118 @@ const plannerData = [
   },
 ];
 
-const STORAGE_KEY = "my-edu-study-planner-v2";
+const practiceMap = {
+  "frontend-html": [
+    { kind: "check", text: "Explain semantic tags, forms, validation, accessibility, and SEO basics without notes." },
+    { kind: "homework", text: "Build a semantic multi-section page with accessible form fields and validation states." },
+    { kind: "pet-project", text: "Create a personal landing page with semantic layout and a realistic form flow." },
+  ],
+  "frontend-css": [
+    { kind: "check", text: "Recreate a layout with Flexbox, Grid, spacing, and responsive breakpoints from memory." },
+    { kind: "homework", text: "Clone one page section in desktop and mobile versions using only CSS." },
+    { kind: "pet-project", text: "Build a small UI kit page with navbar, cards, modal, and responsive grid." },
+  ],
+  "frontend-javascript": [
+    { kind: "check", text: "Explain DOM events, async flow, fetch, and state updates in your own words." },
+    { kind: "homework", text: "Make a searchable list with fetch, loading state, empty state, and filtering." },
+    { kind: "pet-project", text: "Build a notes or habit tracker app with localStorage and dynamic UI updates." },
+  ],
+  "frontend-framework": [
+    { kind: "check", text: "Compare the framework options and justify the one you will learn first." },
+    { kind: "homework", text: "Rebuild one previous vanilla page in your chosen framework." },
+    { kind: "pet-project", text: "Create a routed dashboard app with reusable components and API-backed data." },
+  ],
+  "frontend-testing": [
+    { kind: "check", text: "Know when to use unit, integration, and end-to-end tests." },
+    { kind: "homework", text: "Add tests for one component, one async flow, and one full page scenario." },
+    { kind: "pet-project", text: "Ship a mini app with a real test suite and test notes." },
+  ],
+  "backend-language": [
+    { kind: "check", text: "Explain why you picked this language and what framework or runtime you will pair with it." },
+    { kind: "homework", text: "Write a CLI script that validates input and saves results somewhere persistent." },
+    { kind: "pet-project", text: "Build a tiny API server with config, healthcheck, and structured errors." },
+  ],
+  "backend-relational-databases": [
+    { kind: "check", text: "Model tables, primary keys, foreign keys, and a few joins without looking things up." },
+    { kind: "homework", text: "Design a users-posts-comments schema and query it with joins." },
+    { kind: "pet-project", text: "Create a real database-backed app with schema, migrations, and seeded data." },
+  ],
+  "backend-apis": [
+    { kind: "check", text: "Explain what makes a solid REST API: routes, status codes, validation, and pagination." },
+    { kind: "homework", text: "Document one small API with CRUD routes and consistent error responses." },
+    { kind: "pet-project", text: "Build a tasks or notes API with filtering, pagination, and auth-protected routes." },
+  ],
+  "backend-web-security": [
+    { kind: "check", text: "Explain HTTPS, CORS, hashing, auth tokens, and key OWASP risks clearly." },
+    { kind: "homework", text: "Harden one API with validation, hashed passwords, and correct CORS settings." },
+    { kind: "pet-project", text: "Ship a protected backend with registration, login, roles, and secrets handling." },
+  ],
+  "backend-testing": [
+    { kind: "check", text: "Know which backend behaviors belong in unit, integration, and functional tests." },
+    { kind: "homework", text: "Test one service layer, one database-backed route, and one auth flow." },
+    { kind: "pet-project", text: "Maintain a backend project with automated tests and seeded test data." },
+  ],
+  "backend-building-for-scale": [
+    { kind: "check", text: "Explain graceful degradation, throttling, scaling, and observability in plain language." },
+    { kind: "homework", text: "Write down failure scenarios for one app and how you would mitigate them." },
+    { kind: "pet-project", text: "Add monitoring, logs, and rate limiting to one deployed backend." },
+  ],
+  "fullstack-react": [
+    { kind: "check", text: "Know how components, props, state, forms, and routing fit together in one app." },
+    { kind: "homework", text: "Build a multi-page frontend that consumes mock or real data." },
+    { kind: "pet-project", text: "Create a polished frontend for one full stack app with dashboard views." },
+  ],
+  "fullstack-node": [
+    { kind: "check", text: "Be comfortable connecting frontend requests to backend routes and responses." },
+    { kind: "homework", text: "Wire one form from UI to API and save its data to a database." },
+    { kind: "pet-project", text: "Create a single app where frontend, backend, and database all work together." },
+  ],
+  "fullstack-rest": [
+    { kind: "check", text: "Know how your frontend handles create, read, update, delete, loading, and errors." },
+    { kind: "homework", text: "Connect one frontend screen to fully working CRUD endpoints." },
+    { kind: "pet-project", text: "Build a complete CRUD app with auth, API, database, and deployment." },
+  ],
+  "fullstack-postgresql": [
+    { kind: "check", text: "Explain what your app stores and how its entities relate." },
+    { kind: "homework", text: "Model one project schema and connect it to forms and API routes." },
+    { kind: "pet-project", text: "Ship a project with migrations, seed data, and relational queries." },
+  ],
+  "fullstack-github-actions": [
+    { kind: "check", text: "Understand how CI checks and deploy steps protect your project." },
+    { kind: "homework", text: "Create a workflow that runs tests and linting on every push." },
+    { kind: "pet-project", text: "Maintain one project with CI, deployment, and post-release checklist." },
+  ],
+};
+
+function buildPlannerData() {
+  return basePlannerData.map((section) => {
+    const items = [];
+
+    section.items.forEach((item) => {
+      items.push({
+        ...item,
+        level: item.kind === "subtopic" ? 1 : 0,
+        category: "official",
+      });
+
+      const practiceItems = practiceMap[item.id] || [];
+      practiceItems.forEach((practiceItem, index) => {
+        items.push({
+          id: `${item.id}-${practiceItem.kind}-${index}`,
+          kind: practiceItem.kind,
+          text: practiceItem.text,
+          level: 2,
+          category: practiceItem.kind,
+        });
+      });
+    });
+
+    return { ...section, items };
+  });
+}
+
+const plannerData = buildPlannerData();
+const STORAGE_KEY = "my-edu-study-planner-v3";
 
 const plannerElement = document.querySelector("#planner");
 const sectionTemplate = document.querySelector("#sectionTemplate");
@@ -438,12 +549,23 @@ function render() {
       const stepNode = stepTemplate.content.firstElementChild.cloneNode(true);
       const checkbox = stepNode.querySelector(".step-checkbox");
       const stepTitle = stepNode.querySelector(".step-title");
-      const stepKind = stepNode.querySelector(".step-kind");
+      const stepMeta = stepNode.querySelector(".step-meta");
       const done = isCompleted(item.id);
 
       stepNode.classList.add(item.kind);
+      if (item.level >= 2) {
+        stepNode.classList.add("deep");
+      }
+
       stepTitle.textContent = item.text;
-      stepKind.textContent = "";
+      stepMeta.textContent =
+        item.category === "official"
+          ? ""
+          : item.kind === "check"
+            ? "Definition of done"
+            : item.kind === "homework"
+              ? "Short practice task"
+              : "Build to prove the skill";
 
       checkbox.checked = done;
       if (item.kind === "note") {

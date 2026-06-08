@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>roadmap.sh Study Tracker</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=4" />
   </head>
   <body>
     <div class="page-shell">
@@ -12,8 +12,8 @@
         <p class="kicker">roadmap.sh study tracker</p>
         <h1>Frontend / Backend / Full Stack</h1>
         <p class="header-note">
-          Click items as you complete them. Labels are adapted from the official
-          roadmap.sh roadmaps.
+          Official roadmap.sh labels stay as the primary track. Secondary rows
+          add study checks, homework, and pet project milestones.
         </p>
       </header>
 
@@ -53,6 +53,13 @@
         </div>
       </section>
 
+      <section class="legend">
+        <span class="legend-item"><strong>Topic</strong> official roadmap node</span>
+        <span class="legend-item"><strong>Check</strong> how to know you learned it</span>
+        <span class="legend-item"><strong>Homework</strong> short proof task</span>
+        <span class="legend-item"><strong>Pet Project</strong> practical build task</span>
+      </section>
+
       <main id="planner" class="planner"></main>
     </div>
 
@@ -83,7 +90,7 @@
           <input class="step-checkbox" type="checkbox" />
           <span class="step-copy">
             <span class="step-title"></span>
-            <span class="step-kind"></span>
+            <span class="step-meta"></span>
           </span>
         </label>
       </article>

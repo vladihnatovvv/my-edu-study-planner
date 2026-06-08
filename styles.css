@@ -36,6 +36,7 @@ a {
 .page-header,
 .stats-bar,
 .toolbar,
+.legend,
 .roadmap-section {
   border: 2px solid var(--line);
   background: var(--surface);
@@ -43,6 +44,7 @@ a {
 
 .page-header,
 .toolbar,
+.legend,
 .roadmap-section,
 .stats-bar {
   margin-bottom: 16px;
@@ -88,10 +90,14 @@ h1 {
 
 .stat-box span,
 .section-progress-text,
-.step-kind {
+.step-meta {
   display: block;
   color: var(--muted);
   font-size: 12px;
+}
+
+.stat-box span,
+.section-progress-text {
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -152,6 +158,19 @@ h1 {
 
 .danger-button {
   border-style: dashed;
+}
+
+.legend {
+  padding: 12px 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  font-size: 13px;
 }
 
 .planner {
@@ -261,7 +280,13 @@ h1 {
   word-break: break-word;
 }
 
-.step-kind {
+.step-meta {
+  margin-top: 4px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.step-meta:empty {
   display: none;
 }
 
@@ -271,6 +296,10 @@ h1 {
 
 .step-card.subtopic .step-main {
   padding-left: 24px;
+}
+
+.step-card.deep .step-main {
+  padding-left: 48px;
 }
 
 .step-card.note .step-main {
@@ -290,6 +319,34 @@ h1 {
 .step-card.completed .step-title {
   text-decoration: line-through;
   color: var(--muted);
+}
+
+.step-card.check .step-title,
+.step-card.homework .step-title,
+.step-card.pet-project .step-title {
+  font-size: 14px;
+}
+
+.step-card.check .step-meta::before,
+.step-card.homework .step-meta::before,
+.step-card.pet-project .step-meta::before {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 1px 6px;
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+
+.step-card.check .step-meta::before {
+  content: "Check";
+}
+
+.step-card.homework .step-meta::before {
+  content: "Homework";
+}
+
+.step-card.pet-project .step-meta::before {
+  content: "Pet Project";
 }
 
 .step-card.hidden {
@@ -327,5 +384,9 @@ h1 {
 
   .section-meta {
     text-align: left;
+  }
+
+  .step-card.deep .step-main {
+    padding-left: 28px;
   }
 }
