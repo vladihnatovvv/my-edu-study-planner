@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Full Stack Study Planner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Adapted from roadmap.sh</p>
+          <h1>Планнер навчання Full Stack</h1>
+          <p class="hero-text">
+            Покроковий трекер по Frontend, Backend і Full Stack темах. Відмічай
+            вивчене, дивись прогрес і рухайся по етапах без хаосу.
+          </p>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-card">
+            <span class="stat-label">Загальний прогрес</span>
+            <strong id="overallProgressText">0%</strong>
+            <div class="progress-track">
+              <div id="overallProgressBar" class="progress-fill"></div>
+            </div>
+          </div>
+
+          <div class="stat-grid">
+            <article class="mini-stat">
+              <span>Всього кроків</span>
+              <strong id="totalSteps">0</strong>
+            </article>
+            <article class="mini-stat">
+              <span>Завершено</span>
+              <strong id="completedSteps">0</strong>
+            </article>
+            <article class="mini-stat">
+              <span>Залишилось</span>
+              <strong id="remainingSteps">0</strong>
+            </article>
+          </div>
+        </div>
+      </header>
+
+      <section class="toolbar">
+        <div class="toolbar-group" role="group" aria-label="Фільтр прогресу">
+          <button class="filter-button active" data-filter="all">Усе</button>
+          <button class="filter-button" data-filter="todo">Ще вивчити</button>
+          <button class="filter-button" data-filter="done">Вивчено</button>
+        </div>
+
+        <div class="toolbar-group">
+          <button id="expandAllButton" class="ghost-button">Розгорнути все</button>
+          <button id="collapseAllButton" class="ghost-button">Згорнути все</button>
+          <button id="resetButton" class="danger-button">Скинути відмітки</button>
+        </div>
+      </section>
+
+      <section class="source-note">
+        <p>
+          Джерела:
+          <a href="https://roadmap.sh/full-stack" target="_blank" rel="noreferrer"
+            >Full Stack</a
+          >,
+          <a href="https://roadmap.sh/frontend" target="_blank" rel="noreferrer"
+            >Frontend</a
+          >,
+          <a href="https://roadmap.sh/backend" target="_blank" rel="noreferrer"
+            >Backend</a
+          >.
+        </p>
+        <p>
+          Цей планнер не копіює roadmap.sh 1-в-1, а перетворює їх теми на
+          зручний особистий чекліст для навчання.
+        </p>
+      </section>
+
+      <main id="planner" class="planner" aria-live="polite"></main>
+    </div>
+
+    <template id="sectionTemplate">
+      <section class="roadmap-section">
+        <button class="section-header" type="button">
+          <div>
+            <p class="section-kicker"></p>
+            <h2 class="section-title"></h2>
+            <p class="section-description"></p>
+          </div>
+          <div class="section-meta">
+            <span class="section-progress-text"></span>
+            <span class="section-chevron" aria-hidden="true">+</span>
+          </div>
+        </button>
+        <div class="section-body">
+          <div class="section-progress-track">
+            <div class="section-progress-fill"></div>
+          </div>
+          <div class="step-list"></div>
+        </div>
+      </section>
+    </template>
+
+    <template id="stepTemplate">
+      <article class="step-card">
+        <label class="step-main">
+          <input class="step-checkbox" type="checkbox" />
+          <span class="step-copy">
+            <span class="step-title"></span>
+            <span class="step-description"></span>
+          </span>
+        </label>
+        <div class="step-tags"></div>
+      </article>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

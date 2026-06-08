@@ -1,0 +1,382 @@
+:root {
+  --bg: #f6efe4;
+  --bg-strong: #eadcc9;
+  --surface: rgba(255, 252, 247, 0.82);
+  --surface-strong: #fff9f1;
+  --text: #1f2a2a;
+  --muted: #586565;
+  --line: rgba(31, 42, 42, 0.12);
+  --accent: #0f766e;
+  --accent-soft: #d5f1ed;
+  --highlight: #d97706;
+  --danger: #b42318;
+  --shadow: 0 24px 70px rgba(41, 33, 24, 0.12);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "IBM Plex Sans", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(15, 118, 110, 0.14), transparent 28%),
+    radial-gradient(circle at top right, rgba(217, 119, 6, 0.12), transparent 26%),
+    linear-gradient(180deg, #fbf5ea 0%, #f5eadb 100%);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.page-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0 56px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.hero-copy,
+.hero-stats,
+.toolbar,
+.source-note,
+.roadmap-section {
+  backdrop-filter: blur(12px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.hero-copy,
+.hero-stats,
+.source-note {
+  border-radius: var(--radius-lg);
+  padding: 28px;
+}
+
+.eyebrow,
+.section-kicker {
+  margin: 0 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--highlight);
+}
+
+h1,
+.section-title {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 0.95;
+}
+
+.hero-text,
+.section-description,
+.source-note p,
+.step-description {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.hero-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.stat-card,
+.mini-stat {
+  padding: 18px;
+  border-radius: var(--radius-md);
+  background: var(--surface-strong);
+  border: 1px solid rgba(15, 118, 110, 0.09);
+}
+
+.stat-label,
+.mini-stat span,
+.section-progress-text {
+  display: block;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.stat-card strong,
+.mini-stat strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 1.9rem;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.progress-track,
+.section-progress-track {
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(15, 118, 110, 0.1);
+}
+
+.progress-track {
+  margin-top: 14px;
+}
+
+.progress-fill,
+.section-progress-fill {
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--highlight), var(--accent));
+  transition: width 180ms ease;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.toolbar {
+  margin-top: 24px;
+  padding: 18px 20px;
+  border-radius: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.toolbar-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.filter-button,
+.ghost-button,
+.danger-button {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: transform 120ms ease, background 120ms ease, color 120ms ease;
+}
+
+.filter-button,
+.ghost-button {
+  background: #efe5d5;
+  color: var(--text);
+}
+
+.filter-button.active {
+  background: var(--accent);
+  color: #f9fafb;
+}
+
+.danger-button {
+  background: #fce7e7;
+  color: var(--danger);
+}
+
+.filter-button:hover,
+.ghost-button:hover,
+.danger-button:hover,
+.section-header:hover {
+  transform: translateY(-1px);
+}
+
+.source-note {
+  margin-top: 22px;
+}
+
+.source-note a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.planner {
+  margin-top: 24px;
+  display: grid;
+  gap: 18px;
+}
+
+.roadmap-section {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.section-header {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 24px 26px 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.section-title {
+  margin: 0 0 8px;
+  font-size: clamp(1.3rem, 2vw, 1.8rem);
+}
+
+.section-description {
+  margin: 0;
+}
+
+.section-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  min-width: 110px;
+}
+
+.section-chevron {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.roadmap-section.open .section-chevron {
+  content: "-";
+}
+
+.section-body {
+  padding: 0 26px 24px;
+  display: none;
+}
+
+.roadmap-section.open .section-body {
+  display: block;
+}
+
+.step-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.step-card {
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(15, 118, 110, 0.08);
+}
+
+.step-main {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+.step-checkbox {
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
+  accent-color: var(--accent);
+  flex: none;
+}
+
+.step-copy {
+  display: grid;
+  gap: 6px;
+}
+
+.step-title {
+  font-weight: 700;
+}
+
+.step-card.completed .step-title,
+.step-card.completed .step-description {
+  opacity: 0.72;
+}
+
+.step-card.completed .step-title {
+  text-decoration: line-through;
+}
+
+.step-tags {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.step-tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: #f3ecdf;
+  color: #435252;
+  padding: 7px 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.step-card.hidden {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    width: min(100% - 20px, 1180px);
+    padding-top: 18px;
+  }
+
+  .hero-copy,
+  .hero-stats,
+  .source-note,
+  .toolbar,
+  .section-header,
+  .section-body {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .section-header {
+    flex-direction: column;
+  }
+
+  .section-meta {
+    align-items: flex-start;
+  }
+}
